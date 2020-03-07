@@ -59,19 +59,46 @@
             color: #aaa;
           }
           /* question pages */
+          main > div {
+            max-width: 575px;
+            width: 100%;
+          }
           .answer-container {
             margin-bottom: 1.5rem
+          }
+          .answer-item {
+            padding: .5rem;
+            border: 1px solid #dcdcdc;
+            border-radius: 3px;
+            background-color: #eee;
+            margin-bottom: .25rem;
+            transition: background-color 300ms, box-shadow 300ms;
+          }
+          .answer-item:hover {
+            background-color: #fafafa;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
           }
 
           /* navigation */
           .nav-container {
             padding-top: 1rem;
-            padding-bottom: 1rem
+            padding-bottom: 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
           }
           .nav-item {
             margin: 0.5rem;
             font-size: .875rem;
             text-decoration: none;
+            color: blue;
+          }
+          .nav-item:visited {
+            color: blue;
+          }
+          .nav-item.disabled {
+            pointer-events: none;
+            color: #aaa;
           }
         </style>
         <!-- TODO: move css to external file -->
@@ -89,6 +116,7 @@
             </svg>
             <span>Wizard Trivia</span>
         </h1>
+        <!-- TODO: replace below with a tagline -->
         <div>
             Welcome to our trivia game
         </div>
