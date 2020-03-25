@@ -104,6 +104,13 @@ app.get("/question-ten", function(request, response) {
     });
 });
 
+//Ashleigh's results function
+app.get("/results", function(request, response) {
+    response.render("results", {
+        headline: "Here are your results!"
+    });
+});
+
 //Ashleigh's 404 request handler
 //404 Request Handler
 app.get('*', function(req, res) {
