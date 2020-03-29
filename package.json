@@ -1,6 +1,6 @@
 {
     "name": "JsWizardTrivia",
-    "author": "Mike Goldberg, Nicole Fork, Ashleigh Lyman",
+    "author": "Mike Goldberg, Nicole Forke, Ashleigh Lyman",
     "private": true,
     "dependencies": {
         "ejs": "^3.0.1",
