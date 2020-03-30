@@ -28,12 +28,16 @@ app.set("view engine", "ejs");
 
 app.use(logger("short"));
 
+// relative links (css and images)
+app.use(express.static(__dirname + '/src'));
+
 // landing page
 app.get("/", function(request, response) {
     response.render("index", {});
 });
 
-// copy and past the following for each question
+
+
 app.get("/question-one", function(request, response) {
     response.render("question-one", {
         question: "Which one of these is not a JavaScript data type?",
@@ -104,14 +108,12 @@ app.get("/question-ten", function(request, response) {
     });
 });
 
-//Ashleigh's results function
 app.get("/results", function(request, response) {
     response.render("results", {
         headline: "Here are your results!"
     });
 });
 
-//Ashleigh's 404 request handler
 //404 Request Handler
 app.get('*', function(req, res) {
     res.send("404! Page not found.")
