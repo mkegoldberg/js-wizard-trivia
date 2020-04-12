@@ -56,6 +56,10 @@
           .btn-big:hover {
             background: #aaa;
           }
+          .btn-big.disabled {
+            pointer-events: none;
+            color: #aaa;
+          }
 
           footer {
             padding: 1rem 0;
@@ -108,26 +112,6 @@
             display: flex;
             flex-direction: row;
             justify-content: center;
-          }
-          /* Previous and Next Buttons */
-          .nav-item {
-            margin: 0.5rem;
-            font-size: .875rem;
-            text-decoration: none;
-            color: blue;
-            display: inline-block;
-            background-image: linear-gradient(to right, gray, white, gray);
-            text-align: center;
-            padding: 15px 15px;
-            width: 100px;
-            border-radius: 5px;
-          }
-          .nav-item:visited {
-            color: blue;
-          }
-          .nav-item.disabled {
-            pointer-events: none;
-            color: #aaa;
           }
 
           /* results page */
