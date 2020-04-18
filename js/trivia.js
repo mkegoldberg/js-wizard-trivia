@@ -98,40 +98,54 @@ var triviaKey = [
     ],
     answer: "B",
   },
-]
+];
 
 // View Model
 function TriviaViewModel() {
-  var self = this
 
-  // bindings
+  // initial values
   this.currentView = ko.observable("home");
   this.questionNumber = ko.observable(0);
-  this.currentQuestion = ko.observable(triviaKey[this.questionNumber]);
-  this.totalCorrectAnswers = ko.observable(0);
 
-   // Actions
-  self.changeView = function (newView) {
-    self.currentView = newView;
-  }
+  // computed
+  this.currentQuestion = ko.computed(function () {
+    return triviaKey[this.questionNumber()];
+  }, this);
 
-  self.changeQuestionForward = function () {
-    // is answer selected?
-      // no => Add warning
-      // yes => this.questionNumber() + 1;
-  }
+  this.currentOptions = ko.computed(function () {
+    return triviaKey[this.questionNumber()].options;
+  }, this);
 
-  self.changeQuestionBackward = function () {
-    // this.questionNumber() - 1;
-  }
+  // methods
+  var self = this;
+  changeView = function (view) {
+    self.currentView(view);
+  };
 
-  self.storeAnswer = function (answer) {
-    // add 'selected' class to the selected answer
-    // add property to object stating if correct or store their answer
-    // if changing answer => remove class previous selected answer
-    // if correct answer => this.totalCorrectAnswers + 1
-    // if changing correct answer to incorrect => this.totalCorrectAnswers - 1
-  }
-}
+  questionUp = function () {
+    let current = this.questionNumber();
+    if (current === 9) {
+      self.currentView('results');
+      return;
+    }
+    this.questionNumber(current + 1);
+  };
+
+  questionDown = function () {
+    let current = this.questionNumber();
+    if (current === 0) {
+      self.currentView('home');
+      return;
+    }
+    this.questionNumber(current - 1);
+  };
+  // self.storeAnswer = function (answer) {
+  //   // add 'selected' class to the selected answer
+  //   // add property to object stating if correct or store their answer
+  //   // if changing answer => remove class previous selected answer
+  //   // if correct answer => this.totalCorrectAnswers + 1
+  //   // if changing correct answer to incorrect => this.totalCorrectAnswers - 1
+  // }
+};
 
 ko.applyBindings(new TriviaViewModel());

@@ -89,7 +89,7 @@
 
       <h2>Good Luck!</h2>
       <button
-        data-bind="click: $root.changeView('q1')"
+        data-bind="click: changeView.bind(this, 'questions')"
         class="btn-big">
           Lets Begin!
       </button>
@@ -97,31 +97,35 @@
 
     <!-- Question Section -->
     <div data-bind="if: currentView() === 'questions'">
-      <!-- bind question -->
-      <h2>bind question here</h2>
-      <div class="answer-container">
-        <!-- begin loop -->
+      <h2 data-bind="text: currentQuestion().question">bind question here</h2>
+      <div
+        data-bind="foreach: currentOptions"
+        class="answer-container">
         <!-- onClick => storeAnswer() -->
-        <div class="answer-item">
-          <!-- option.letter -->
-          <span>bind letter</span>
-          <!-- option.text -->
-          Bind Answer
+        <div
+          class="answer-item"
+        >
+          <span data-bind="text: letter"></span>
+          <span data-bind="text: text"></span>
         </div>
       </div>
       <div class="nav-container">
-        <!-- bind $root.changeQuestionBackward() -->
-        <!-- bind class 'disabled' if currentQuestion === 0 -->
-        <button class="btn-big disabled">Previous</button>
-        <!-- bind $root.changeQuestionFoward() -->
-        <button class="btn-big">Next</button>
+        <button
+          data-bind="click: questionDown, css: { disabled: questionNumber() === 0} "
+          class="btn-big"
+        >
+          Previous
+        </button>
+        <button
+          data-bind="click: questionUp, text:  questionNumber() === 9 ? 'Finish' : 'Next'"
+          class="btn-big"
+        >
+        </button>
       </div>
     </div>
 
     <!-- Results -->
-    <div
-      data-bind="if: currentView() === 'results'" class="results"
-    >
+    <div data-bind="if: currentView() === 'results'" class="results">
       <h2>
         Here are your results!
       </h2>
