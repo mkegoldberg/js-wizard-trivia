@@ -100,9 +100,10 @@
       <h2 data-bind="text: currentQuestion().question"></h2>
       <div
         data-bind="foreach: currentOptions"
-        class="answer-container">
+        class="answer-container"
+      >
         <div
-          data-bind="click: recordAnswer.bind(this, $data.letter)"
+          data-bind="css: { selected: $root.userKey()[$root.questionNumber()].selected === $data.letter }, click: recordAnswer.bind(this, $data.letter)"
           class="answer-item"
         >
           <span data-bind="text: letter"></span>

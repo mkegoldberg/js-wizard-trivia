@@ -125,9 +125,6 @@ function TriviaViewModel() {
   self.currentOptions = ko.computed(function () {
     return triviaKey[self.questionNumber()].options;
   });
-  self.currentUserSelection = ko.computed(function () {
-    return self.userKey[self.questionNumber()];
-  });
   self.ranking = ko.computed(function () {
     return self.numberCorrect() <= 5
       ? "BEGINNER"
@@ -176,8 +173,6 @@ function TriviaViewModel() {
       }
     });
     self.numberCorrect(correct);
-    console.log(correct);
-    console.log(self.numberCorrect());
   }
 };
 
