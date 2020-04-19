@@ -55,6 +55,7 @@
           }
           .btn-big:hover {
             background: #aaa;
+            color: #fafafa;
           }
           .btn-big.disabled {
             pointer-events: none;
@@ -157,6 +158,11 @@
             align-items: center;
             justify-content: center;
 
+          }
+          .rank,
+          .percentage {
+            font-size: 1.85rem;
+            font-weight: 600;
           }
           @media screen and (max-width: 639px) {
             .result-container {

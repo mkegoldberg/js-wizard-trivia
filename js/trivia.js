@@ -125,6 +125,10 @@ function TriviaViewModel() {
   self.currentOptions = ko.computed(function () {
     return triviaKey[self.questionNumber()].options;
   });
+  self.percentCorrect = ko.computed(function () {
+    let percent = self.numberCorrect() * 10;
+    return percent + "%";
+  });
   self.ranking = ko.computed(function () {
     return self.numberCorrect() <= 5
       ? "BEGINNER"
@@ -158,10 +162,12 @@ function TriviaViewModel() {
   };
 
   recordAnswer = function (answer) {
+    let temp = self.userKey();
     let result = answer === self.currentQuestion().answer
       ? "correct"
       : "incorrect";
-    userAnswers[self.questionNumber()] = { selected: answer, result: result };
+    temp[self.questionNumber()] = { selected: answer, result: result };
+    self.userKey(temp);
   };
 
   getResults = function () {
@@ -173,7 +179,7 @@ function TriviaViewModel() {
       }
     });
     self.numberCorrect(correct);
-  }
+  };
 };
 
 ko.applyBindings(new TriviaViewModel());

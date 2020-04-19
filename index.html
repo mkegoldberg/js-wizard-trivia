@@ -103,7 +103,7 @@
         class="answer-container"
       >
         <div
-          data-bind="css: { selected: $root.userKey()[$root.questionNumber()].selected === $data.letter }, click: recordAnswer.bind(this, $data.letter)"
+          data-bind="css: { selected: $root.userKey()[$root.questionNumber()].selected === letter }, click: recordAnswer.bind(this, letter)"
           class="answer-item"
         >
           <span data-bind="text: letter"></span>
@@ -180,19 +180,17 @@
           </div>
         </div>
         <div class="result-card">
-          <div class="result-card-headline">Your Ranking</div>
+          <div class="result-card-headline">Your Score</div>
           <div class="result-card-overview">
-            Your ranking:<br />
-            <div data-bind="text: ranking()" style="font-weight: 600;"></div>
+            <span data-bind="text: numberCorrect()"></span> out of 10
+            <div data-bind="text: percentCorrect" class="percentage"></div>
           </div>
         </div>
         <div class="result-card">
-          <div class="result-card-headline">Your Score</div>
+          <div class="result-card-headline">Your Ranking</div>
           <div class="result-card-overview">
-            <!-- Bind totalCorrectAnswers -->
-            <div>You got:</div>
-            <span data-bind="text: numberCorrect()"></span> out of 10
-            <div>correct!</div>
+            Your ranking:<br />
+            <div data-bind="text: ranking()" class="rank"></div>
           </div>
         </div>
       </div>
