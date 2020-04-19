@@ -1,8 +1,4 @@
 // JavaScript for Trivia Game
-function logTest() {
-  console.log("Connected!");
-}
-logTest();
 
 // global variables
 var triviaKey = [
@@ -100,52 +96,89 @@ var triviaKey = [
   },
 ];
 
+var userAnswers = [
+  { selected: "x", result: "incorrect" },
+  { selected: "x", result: "incorrect" },
+  { selected: "x", result: "incorrect" },
+  { selected: "x", result: "incorrect" },
+  { selected: "x", result: "incorrect" },
+  { selected: "x", result: "incorrect" },
+  { selected: "x", result: "incorrect" },
+  { selected: "x", result: "incorrect" },
+  { selected: "x", result: "incorrect" },
+  { selected: "x", result: "incorrect" },
+];
+
 // View Model
 function TriviaViewModel() {
-
+  var self = this;
   // initial values
-  this.currentView = ko.observable("home");
-  this.questionNumber = ko.observable(0);
+  self.currentView = ko.observable("home");
+  self.questionNumber = ko.observable(0);
+  self.userKey = ko.observableArray(userAnswers);
+  self.numberCorrect = ko.observable(0);
 
   // computed
-  this.currentQuestion = ko.computed(function () {
-    return triviaKey[this.questionNumber()];
-  }, this);
-
-  this.currentOptions = ko.computed(function () {
-    return triviaKey[this.questionNumber()].options;
-  }, this);
+  self.currentQuestion = ko.computed(function () {
+    return triviaKey[self.questionNumber()];
+  });
+  self.currentOptions = ko.computed(function () {
+    return triviaKey[self.questionNumber()].options;
+  });
+  self.currentUserSelection = ko.computed(function () {
+    return self.userKey[self.questionNumber()];
+  });
+  self.ranking = ko.computed(function () {
+    return self.numberCorrect() <= 5
+      ? "BEGINNER"
+      : self.numberCorrect() > 5 && self.numberCorrect() < 9
+      ? "NOVICE"
+      : "EXPERT";
+  });
 
   // methods
-  var self = this;
   changeView = function (view) {
     self.currentView(view);
   };
 
   questionUp = function () {
-    let current = this.questionNumber();
+    let current = self.questionNumber();
     if (current === 9) {
+      getResults();
       self.currentView('results');
       return;
     }
-    this.questionNumber(current + 1);
+    self.questionNumber(current + 1);
   };
 
   questionDown = function () {
-    let current = this.questionNumber();
+    let current = self.questionNumber();
     if (current === 0) {
       self.currentView('home');
       return;
     }
-    this.questionNumber(current - 1);
+    self.questionNumber(current - 1);
   };
-  // self.storeAnswer = function (answer) {
-  //   // add 'selected' class to the selected answer
-  //   // add property to object stating if correct or store their answer
-  //   // if changing answer => remove class previous selected answer
-  //   // if correct answer => this.totalCorrectAnswers + 1
-  //   // if changing correct answer to incorrect => this.totalCorrectAnswers - 1
-  // }
+
+  recordAnswer = function (answer) {
+    let result = answer === self.currentQuestion().answer
+      ? "correct"
+      : "incorrect";
+    userAnswers[self.questionNumber()] = { selected: answer, result: result };
+  };
+
+  getResults = function () {
+    let correct = 0;
+    let answers = self.userKey()
+    answers.forEach(a => {
+      if (a.result === "correct") {
+        correct++;
+      }
+    });
+    self.numberCorrect(correct);
+    console.log(correct);
+    console.log(self.numberCorrect());
+  }
 };
 
 ko.applyBindings(new TriviaViewModel());

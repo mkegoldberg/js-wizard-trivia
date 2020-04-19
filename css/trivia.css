@@ -97,6 +97,10 @@
             background-color: #fafafa;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
           }
+          .answer-item.selected {
+            background-color: #fafafa;
+            border: 1px solid #63b3ed;
+          }
           .answer-item span:first-child {
             padding-right: .5rem;
             margin-right: .25rem;
@@ -150,7 +154,6 @@
           .result-card-overview {
             line-height: 1.5;
             height: 100%;
-            display: flex;
             align-items: center;
             justify-content: center;
 

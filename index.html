@@ -97,12 +97,12 @@
 
     <!-- Question Section -->
     <div data-bind="if: currentView() === 'questions'">
-      <h2 data-bind="text: currentQuestion().question">bind question here</h2>
+      <h2 data-bind="text: currentQuestion().question"></h2>
       <div
         data-bind="foreach: currentOptions"
         class="answer-container">
-        <!-- onClick => storeAnswer() -->
         <div
+          data-bind="click: recordAnswer.bind(this, $data.letter)"
           class="answer-item"
         >
           <span data-bind="text: letter"></span>
@@ -135,43 +135,43 @@
           <div class="result-key">
             <ul>
               <!-- Bind class to display green if they got correct or red for incorrect -->
-              <li>
+              <li data-bind="style: { color: userKey()[0].selected === 'C' ? 'green' : 'red' }">
                 Which one of these is not a JavaScript data type?"<br />
                 C) Loop
               </li>
-              <li>
+              <li data-bind="style: { color: userKey()[1].selected === 'A' ? 'green' : 'red' }">
                 The following is a symbol for a comment in Javascript, ‘//’"<br />
                 A) True
               </li>
-              <li>
+              <li data-bind="style: { color: userKey()[2].selected === 'C' ? 'green' : 'red' }">
                 What will this line of text perform in Javascript, ‘console.log()’?"<br />
                 C) Creates and logs keyed variables
               </li>
-              <li>
+              <li data-bind="style: { color: userKey()[3].selected === 'A' ? 'green' : 'red' }">
                 JavaScript is case-sensitive?"<br />
                 A) True
               </li>
-              <li>
+              <li data-bind="style: { color: userKey()[4].selected === 'A' ? 'green' : 'red' }">
                 Which symbols/characters create an array?"<br />
                 A) [ ]
               </li>
-              <li>
+              <li data-bind="style: { color: userKey()[5].selected === 'A' ? 'green' : 'red' }">
                 What is a local variable?"<br />
                 A) Loop
               </li>
-              <li>
+              <li data-bind="style: { color: userKey()[6].selected === 'B' ? 'green' : 'red' }">
                 Which term is used to convert one data type to another?<br />
                 B) Parse
               </li>
-              <li>
+              <li data-bind="style: { color: userKey()[7].selected === 'B' ? 'green' : 'red' }">
                 JavaScript has two types of functions, named or literal"<br />
                 B) False
               </li>
-              <li>
+              <li data-bind="style: { color: userKey()[8].selected === 'A' ? 'green' : 'red' }">
                 JavaScript is a scripting language and an object-oriented programming language"<br />
                 A) True
               </li>
-              <li>
+              <li data-bind="style: { color: userKey()[9].selected === 'B' ? 'green' : 'red' }">
                 Which company developed JavaScript?"<br />
                 B) Netscape
               </li>
@@ -182,15 +182,16 @@
           <div class="result-card-headline">Your Ranking</div>
           <div class="result-card-overview">
             Your ranking:<br />
-            ABOVE AVERAGE
+            <div data-bind="text: ranking()" style="font-weight: 600;"></div>
           </div>
         </div>
         <div class="result-card">
           <div class="result-card-headline">Your Score</div>
           <div class="result-card-overview">
             <!-- Bind totalCorrectAnswers -->
-            You got:<br />
-            9 out of 10 correct!
+            <div>You got:</div>
+            <span data-bind="text: numberCorrect()"></span> out of 10
+            <div>correct!</div>
           </div>
         </div>
       </div>
