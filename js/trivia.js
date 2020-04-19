@@ -132,7 +132,7 @@ function TriviaViewModel() {
   self.ranking = ko.computed(function () {
     return self.numberCorrect() <= 5
       ? "BEGINNER"
-      : self.numberCorrect() > 5 && self.numberCorrect() < 9
+      : self.numberCorrect() > 5 && self.numberCorrect() < 8
       ? "NOVICE"
       : "EXPERT";
   });
